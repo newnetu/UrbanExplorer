@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Test4</string>
+    <string name="headingLI">UrbanExplorer</string>
+    <string name="button2">Login</string>
+    <string name="button3">Sign Up</string>
+    <string name="textView">Join UrbanExplorer</string>
+</resources>
