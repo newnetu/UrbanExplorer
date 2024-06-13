@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Locations;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -13,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Locations location = new Locations();
+        location.setModel();
 
         Amplify.Auth.getCurrentUser(
                 authUser ->{ //onSuccess

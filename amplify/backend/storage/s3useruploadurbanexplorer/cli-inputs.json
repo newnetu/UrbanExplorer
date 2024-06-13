@@ -1,0 +1,10 @@
+{
+  "resourceName": "s3useruploadurbanexplorer",
+  "bucketName": "user-upload-urbanexplorer",
+  "policyUUID": "afc10d92",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE"
+  ]
+}

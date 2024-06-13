@@ -1,34 +1,37 @@
 package com.amplifyframework.datastore.generated.model;
 
-import static com.amplifyframework.core.model.query.predicate.QueryField.field;
+import com.amplifyframework.core.model.temporal.Temporal;
+import com.amplifyframework.core.model.ModelIdentifier;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
-import com.amplifyframework.core.model.ModelIdentifier;
 import com.amplifyframework.core.model.ModelOperation;
 import com.amplifyframework.core.model.annotations.AuthRule;
+import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
-import com.amplifyframework.core.model.temporal.Temporal;
 
-import java.util.Objects;
-import java.util.UUID;
+import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the UserData type in your schema. */
+/** This is an auto generated class representing the LocationInfo type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "UserData", type = Model.Type.USER, version = 1, authRules = {
+@ModelConfig(pluralName = "LocationInfos", type = Model.Type.USER, version = 1, authRules = {
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
-public final class UserData implements Model {
-  public static final QueryField ID = field("UserData", "id");
-  public static final QueryField NAME = field("UserData", "name");
-  public static final QueryField POINTS = field("UserData", "points");
+public final class LocationInfo implements Model {
+  public static final QueryField ID = field("LocationInfo", "id");
+  public static final QueryField CATEGORY = field("LocationInfo", "Category");
+  public static final QueryField IMAGE_KEY = field("LocationInfo", "ImageKey");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String name;
-  private final @ModelField(targetType="Int") Integer points;
+  private final @ModelField(targetType="Preferences") Preferences Category;
+  private final @ModelField(targetType="String") String ImageKey;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   /** @deprecated This API is internal to Amplify and should not be used. */
@@ -41,12 +44,12 @@ public final class UserData implements Model {
       return id;
   }
   
-  public String getName() {
-      return name;
+  public Preferences getCategory() {
+      return Category;
   }
   
-  public Integer getPoints() {
-      return points;
+  public String getImageKey() {
+      return ImageKey;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -57,10 +60,10 @@ public final class UserData implements Model {
       return updatedAt;
   }
   
-  private UserData(String id, String name, Integer points) {
+  private LocationInfo(String id, Preferences Category, String ImageKey) {
     this.id = id;
-    this.name = name;
-    this.points = points;
+    this.Category = Category;
+    this.ImageKey = ImageKey;
   }
   
   @Override
@@ -70,12 +73,12 @@ public final class UserData implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      UserData userData = (UserData) obj;
-      return ObjectsCompat.equals(getId(), userData.getId()) &&
-              ObjectsCompat.equals(getName(), userData.getName()) &&
-              ObjectsCompat.equals(getPoints(), userData.getPoints()) &&
-              ObjectsCompat.equals(getCreatedAt(), userData.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), userData.getUpdatedAt());
+      LocationInfo locationInfo = (LocationInfo) obj;
+      return ObjectsCompat.equals(getId(), locationInfo.getId()) &&
+              ObjectsCompat.equals(getCategory(), locationInfo.getCategory()) &&
+              ObjectsCompat.equals(getImageKey(), locationInfo.getImageKey()) &&
+              ObjectsCompat.equals(getCreatedAt(), locationInfo.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), locationInfo.getUpdatedAt());
       }
   }
   
@@ -83,8 +86,8 @@ public final class UserData implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getName())
-      .append(getPoints())
+      .append(getCategory())
+      .append(getImageKey())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -94,17 +97,17 @@ public final class UserData implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("UserData {")
+      .append("LocationInfo {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("name=" + String.valueOf(getName()) + ", ")
-      .append("points=" + String.valueOf(getPoints()) + ", ")
+      .append("Category=" + String.valueOf(getCategory()) + ", ")
+      .append("ImageKey=" + String.valueOf(getImageKey()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
       .toString();
   }
   
-  public static NameStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -116,8 +119,8 @@ public final class UserData implements Model {
    * @param id the id of the existing item this instance will represent
    * @return an instance of this model with only ID populated
    */
-  public static UserData justId(String id) {
-    return new UserData(
+  public static LocationInfo justId(String id) {
+    return new LocationInfo(
       id,
       null,
       null
@@ -126,55 +129,50 @@ public final class UserData implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      name,
-      points);
+      Category,
+      ImageKey);
   }
-  public interface NameStep {
-    BuildStep name(String name);
-  }
-  
-
   public interface BuildStep {
-    UserData build();
+    LocationInfo build();
     BuildStep id(String id);
-    BuildStep points(Integer points);
+    BuildStep category(Preferences category);
+    BuildStep imageKey(String imageKey);
   }
   
 
-  public static class Builder implements NameStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String name;
-    private Integer points;
+    private Preferences Category;
+    private String ImageKey;
     public Builder() {
       
     }
     
-    private Builder(String id, String name, Integer points) {
+    private Builder(String id, Preferences Category, String ImageKey) {
       this.id = id;
-      this.name = name;
-      this.points = points;
+      this.Category = Category;
+      this.ImageKey = ImageKey;
     }
     
     @Override
-     public UserData build() {
+     public LocationInfo build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new UserData(
+        return new LocationInfo(
           id,
-          name,
-          points);
+          Category,
+          ImageKey);
     }
     
     @Override
-     public BuildStep name(String name) {
-        Objects.requireNonNull(name);
-        this.name = name;
+     public BuildStep category(Preferences category) {
+        this.Category = category;
         return this;
     }
     
     @Override
-     public BuildStep points(Integer points) {
-        this.points = points;
+     public BuildStep imageKey(String imageKey) {
+        this.ImageKey = imageKey;
         return this;
     }
     
@@ -190,26 +188,26 @@ public final class UserData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, Integer points) {
-      super(id, name, points);
-      Objects.requireNonNull(name);
+    private CopyOfBuilder(String id, Preferences category, String imageKey) {
+      super(id, Category, ImageKey);
+      
     }
     
     @Override
-     public CopyOfBuilder name(String name) {
-      return (CopyOfBuilder) super.name(name);
+     public CopyOfBuilder category(Preferences category) {
+      return (CopyOfBuilder) super.category(category);
     }
     
     @Override
-     public CopyOfBuilder points(Integer points) {
-      return (CopyOfBuilder) super.points(points);
+     public CopyOfBuilder imageKey(String imageKey) {
+      return (CopyOfBuilder) super.imageKey(imageKey);
     }
   }
   
 
-  public static class UserDataIdentifier extends ModelIdentifier<UserData> {
+  public static class LocationInfoIdentifier extends ModelIdentifier<LocationInfo> {
     private static final long serialVersionUID = 1L;
-    public UserDataIdentifier(String id) {
+    public LocationInfoIdentifier(String id) {
       super(id);
     }
   }

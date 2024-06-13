@@ -1,4 +1,17 @@
+enum Preferences {
+  FOOD
+  HISTORY
+}
+
+type LocationInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Category: Preferences
+  ImageKey: String
+}
+
 type UserData @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
+  points: Int
 }
+ 
