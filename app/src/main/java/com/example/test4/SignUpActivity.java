@@ -2,20 +2,17 @@ package com.example.test4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
-import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.core.Amplify;
 
@@ -29,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onPressJoin(View view){
+        Log.d("myJoinError","Is pressed");
         EditText txtEmail = findViewById(R.id.txtEmail);
         EditText txtPassword = findViewById(R.id.txtPassword);
 
