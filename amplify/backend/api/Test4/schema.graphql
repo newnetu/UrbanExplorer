@@ -1,3 +1,10 @@
+type Cars @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  colour: String
+  description: String
+  speed: Int
+}
+
 enum Preferences {
   FOOD
   HISTORY

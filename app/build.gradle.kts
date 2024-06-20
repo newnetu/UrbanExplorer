@@ -47,6 +47,9 @@ dependencies {
     implementation("com.amplifyframework:aws-datastore:2.16.1")
     implementation("com.amplifyframework:aws-storage-s3:2.16.1")
     implementation("com.amplifyframework:aws-auth-cognito:2.18.0")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+    implementation ("com.amazonaws:aws-android-sdk-s3:2.49.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
 

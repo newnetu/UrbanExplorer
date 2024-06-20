@@ -12,13 +12,15 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.LocationInfo;
 import com.amplifyframework.storage.StoragePath;
+import com.bumptech.glide.Glide;
 
-import java.io.InputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-
+import java.io.InputStream;
 
 public class UploadActivity extends AppCompatActivity {
 
@@ -97,7 +99,39 @@ public class UploadActivity extends AppCompatActivity {
 
 
 
+    public void queryModel(View view) {
 
+        Amplify.API.query(
+                ModelQuery.list(LocationInfo.class, LocationInfo.CATEGORY.eq("HISTORY")),
+                response -> {
+                    for (LocationInfo todo : response.getData()) {
+                        Log.i("MyAmplifyQuery1", todo.getImageKey());
+                        String keyName = todo.getImageKey();
+                        ImageView imageView = findViewById(R.id.imageView);
+
+
+                        //File newImage;
+                        Amplify.Storage.downloadFile(
+                                StoragePath.fromString("public/locations/"+keyName),
+                                new File(getApplicationContext().getFilesDir() + keyName),
+                                result -> Glide.with(this)
+                                            .load(result.getFile())
+                                            .into(imageView),
+                                error -> Log.e("DownloadStuff",  "Download Failure", error)
+                                );
+//                        Amplify.Storage.downloadFile(
+//                                StoragePath.fromString("public/locations/"+keyName),
+//                                new File(getApplicationContext().getFilesDir() + keyName),
+//                                result -> Log.i("DownloadStuff", "Successfully downloaded: " + result.getFile().getName()),
+//                                error -> Log.e("DownloadStuff",  "Download Failure", error)
+//                        );
+                    }
+                },
+                error -> Log.e("MyAmplifyQuery", "Query failure", error)
+        );
+
+        Log.i("ButtonWork", "Button Clicked ");
+    }
 
 
 }
