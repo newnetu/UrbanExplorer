@@ -4,4 +4,34 @@
     <string name="button2">Login</string>
     <string name="button3">Sign Up</string>
     <string name="textView">Join UrbanExplorer</string>
+    <string name="textView3">Welcome to Urban Explorer</string>
+
+    <string name="textView4">Choose a City</string>
+    <string name="textView5">Cape Town</string>
+    <string name="textView6">Dublin</string>
+    <string name="textView7">Rome</string>
+    <string name="textView8">London</string>
+
+
+    <string name="textView9">Choose your Option</string>
+    <string name="textView10">Restaurants</string>
+    <string name="textView11">Historical Landmarks</string>
+
+    <string name="textView12">Restaurants</string>
+    <string name="textView13">Mama Africa</string>
+    <string name="textView14">Empty</string>
+
+    <string name="textView15">Historical Landmarks</string>
+    <string name="textView16">Cape Town City Hall</string>
+    <string name="textView17">Table Mountain</string>
+    <string name="textView18">Robben Island</string>
+
+    <string name="textView21">Profile</string>
+    <string name="textView22">Name</string>
+    <string name="textView23">Point</string>
+    <string name="textView19">Sibusiso</string>
+    <string name="textView20">1234pts</string>
+
+
+
 </resources>
