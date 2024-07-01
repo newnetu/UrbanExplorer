@@ -1,21 +1,24 @@
 package com.amplifyframework.datastore.generated.model;
 
-import static com.amplifyframework.core.model.query.predicate.QueryField.field;
+import com.amplifyframework.core.model.temporal.Temporal;
+import com.amplifyframework.core.model.ModelIdentifier;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
-import com.amplifyframework.core.model.ModelIdentifier;
 import com.amplifyframework.core.model.ModelOperation;
 import com.amplifyframework.core.model.annotations.AuthRule;
+import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
-import com.amplifyframework.core.model.temporal.Temporal;
 
-import java.util.Objects;
-import java.util.UUID;
+import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
 /** This is an auto generated class representing the UserData type in your schema. */
 @SuppressWarnings("all")
@@ -26,9 +29,11 @@ public final class UserData implements Model {
   public static final QueryField ID = field("UserData", "id");
   public static final QueryField NAME = field("UserData", "name");
   public static final QueryField POINTS = field("UserData", "points");
+  public static final QueryField EMAIL = field("UserData", "Email");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="Int") Integer points;
+  private final @ModelField(targetType="AWSEmail", isRequired = true) String Email;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   /** @deprecated This API is internal to Amplify and should not be used. */
@@ -49,6 +54,10 @@ public final class UserData implements Model {
       return points;
   }
   
+  public String getEmail() {
+      return Email;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -57,10 +66,11 @@ public final class UserData implements Model {
       return updatedAt;
   }
   
-  private UserData(String id, String name, Integer points) {
+  private UserData(String id, String name, Integer points, String Email) {
     this.id = id;
     this.name = name;
     this.points = points;
+    this.Email = Email;
   }
   
   @Override
@@ -74,6 +84,7 @@ public final class UserData implements Model {
       return ObjectsCompat.equals(getId(), userData.getId()) &&
               ObjectsCompat.equals(getName(), userData.getName()) &&
               ObjectsCompat.equals(getPoints(), userData.getPoints()) &&
+              ObjectsCompat.equals(getEmail(), userData.getEmail()) &&
               ObjectsCompat.equals(getCreatedAt(), userData.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), userData.getUpdatedAt());
       }
@@ -85,6 +96,7 @@ public final class UserData implements Model {
       .append(getId())
       .append(getName())
       .append(getPoints())
+      .append(getEmail())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -98,6 +110,7 @@ public final class UserData implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("points=" + String.valueOf(getPoints()) + ", ")
+      .append("Email=" + String.valueOf(getEmail()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -120,6 +133,7 @@ public final class UserData implements Model {
     return new UserData(
       id,
       null,
+      null,
       null
     );
   }
@@ -127,10 +141,16 @@ public final class UserData implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       name,
-      points);
+      points,
+      Email);
   }
   public interface NameStep {
-    BuildStep name(String name);
+    EmailStep name(String name);
+  }
+  
+
+  public interface EmailStep {
+    BuildStep email(String email);
   }
   
 
@@ -141,18 +161,20 @@ public final class UserData implements Model {
   }
   
 
-  public static class Builder implements NameStep, BuildStep {
+  public static class Builder implements NameStep, EmailStep, BuildStep {
     private String id;
     private String name;
+    private String Email;
     private Integer points;
     public Builder() {
       
     }
     
-    private Builder(String id, String name, Integer points) {
+    private Builder(String id, String name, Integer points, String Email) {
       this.id = id;
       this.name = name;
       this.points = points;
+      this.Email = Email;
     }
     
     @Override
@@ -162,13 +184,21 @@ public final class UserData implements Model {
         return new UserData(
           id,
           name,
-          points);
+          points,
+          Email);
     }
     
     @Override
-     public BuildStep name(String name) {
+     public EmailStep name(String name) {
         Objects.requireNonNull(name);
         this.name = name;
+        return this;
+    }
+    
+    @Override
+     public BuildStep email(String email) {
+        Objects.requireNonNull(email);
+        this.Email = email;
         return this;
     }
     
@@ -190,14 +220,20 @@ public final class UserData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, Integer points) {
-      super(id, name, points);
+    private CopyOfBuilder(String id, String name, Integer points, String email) {
+      super(id, name, points, Email);
       Objects.requireNonNull(name);
+      Objects.requireNonNull(Email);
     }
     
     @Override
      public CopyOfBuilder name(String name) {
       return (CopyOfBuilder) super.name(name);
+    }
+    
+    @Override
+     public CopyOfBuilder email(String email) {
+      return (CopyOfBuilder) super.email(email);
     }
     
     @Override

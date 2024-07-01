@@ -1,6 +1,8 @@
 package com.example.test4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,22 @@ public class HistoryActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void cityHallPressed(View view){
+        Intent i = new Intent(this,CityHallActivity.class);
+        startActivity(i);
+
+        Intent dataSender = new Intent(this, RekogitionClientActivity.class);
+        dataSender.putExtra("selected","Cape Town City Hall");
+    }
+
+    public void robbenIslandPressed(View view){
+        Intent i = new Intent(this,RobbenIslandActivity.class);
+        startActivity(i);
+
+        Intent dataSender = new Intent(this, RekogitionClientActivity.class);
+        dataSender.putExtra("selected","Robben Island");
+    }
+
+
 }

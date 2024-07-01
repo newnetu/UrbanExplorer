@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:name=".myAmplifyApp"
         android:allowBackup="true"
@@ -13,6 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test4"
         tools:targetApi="31">
+        <activity
+            android:name=".RobbenIslandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MamaAfricaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FoodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RekogitionClientActivity"
+            android:exported="false" />
         <activity
             android:name=".UploadActivity"
             android:exported="false" />

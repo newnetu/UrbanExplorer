@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.api.ApiException;
+import com.amplifyframework.api.graphql.GraphQLResponse;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.DataStoreException;
-import com.amplifyframework.datastore.DataStoreItemChange;
+
 import com.amplifyframework.datastore.generated.model.UserData;
 
 
@@ -31,7 +33,6 @@ public class EmailConfirmationActivity extends AppCompatActivity {
         //Confirm the code
         //Re-login
         //Save the user details such names in Data-store
-
         EditText txtConfirmationCode = findViewById(R.id.txtConfirmationCode);
 
         Amplify.Auth.confirmSignUp(
@@ -65,35 +66,35 @@ public class EmailConfirmationActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess(AuthSignInResult authSignInResult) {
-       Amplify.Auth.getCurrentUser(
-                authUser ->{
-                    String userID = authUser.getUserId();
-                    String name = getName();
+        UserData newUser = UserData.builder()
+                .name(getName())
+                .email(getEmail())
+                .points(0)
+                .build();
+        Amplify.API.mutate(ModelMutation.create(newUser),
+                this::onSavedSuccess,
+                this::onSaveError
 
-                    Amplify.DataStore.save(
-                            UserData.builder().name(name).build(),
-                            this::onSavedSuccess,
-                            this::onSaveError
-                    );
-                },
-               AuthException ->{
-                   Log.e("AmplifyAuth", "Error getting current user", AuthException);
-               }
         );
 
     }
 
-    private void onSavedSuccess(DataStoreItemChange<UserData> userDataDataStoreItemChange) {
+    private void onSavedSuccess(GraphQLResponse<UserData> userDataGraphQLResponse) {
+        Log.i("User DataStore","Saved Successfully");
         Intent i = new Intent(this,HomeActivity.class);
         startActivity(i);
+
     }
 
-
-    private void onSaveError(DataStoreException e) {
+    private void onSaveError(ApiException e) {
+        Log.e("User DataStore", "Save Failed ", e);
         this.runOnUiThread(()->{
             Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
+
+
+
 
     public String getName(){
         return getIntent().getStringExtra("name");

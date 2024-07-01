@@ -7,11 +7,14 @@ type LocationInfo @model @auth(rules: [{allow: public}]) {
   id: ID!
   Category: Preferences
   ImageKey: String
+  Facts: String
+  Address: String
 }
 
 type UserData @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   points: Int
+  Email: AWSEmail!
 }
  

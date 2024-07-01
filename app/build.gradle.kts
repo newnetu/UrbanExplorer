@@ -42,11 +42,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.amplifyframework:core:2.18.0")
+
+    implementation ("com.amplifyframework:core:2.19.1")
     implementation("com.amplifyframework:aws-api:2.16.1")
     implementation("com.amplifyframework:aws-datastore:2.16.1")
     implementation("com.amplifyframework:aws-storage-s3:2.16.1")
     implementation("com.amplifyframework:aws-auth-cognito:2.18.0")
+    implementation("com.amplifyframework:aws-predictions:2.19.1")
+
+
+
+    implementation("com.amazonaws:aws-android-sdk-core:2.16.11")
+    implementation("com.amazonaws:aws-android-sdk-s3:2.16.11")
+    implementation("com.amazonaws:aws-android-sdk-rekognition:2.16.11")
+
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
 

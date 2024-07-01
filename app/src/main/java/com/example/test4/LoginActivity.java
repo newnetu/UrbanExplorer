@@ -2,6 +2,7 @@ package com.example.test4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,8 +14,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.amplifyframework.auth.AuthException;
+import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
+import com.amplifyframework.auth.cognito.result.GlobalSignOutError;
+import com.amplifyframework.auth.cognito.result.HostedUIError;
+import com.amplifyframework.auth.cognito.result.RevokeTokenError;
 import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.UserData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,16 +44,20 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
+
     private void onLoginError(AuthException e) {
         this.runOnUiThread(()->{
             Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
         });
-
+        Log.e("loginError","login failed ", e);
     }
 
     private void onLoginSuccess(AuthSignInResult authSignInResult) {
-        Intent i = new Intent(this,UploadActivity.class);
+        Intent i = new Intent(this,HomeActivity.class);
         startActivity(i);
+
+
+
     }
 
     public void onSignUpPressed(View view){

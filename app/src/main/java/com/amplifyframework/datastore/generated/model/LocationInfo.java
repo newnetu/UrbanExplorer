@@ -29,9 +29,13 @@ public final class LocationInfo implements Model {
   public static final QueryField ID = field("LocationInfo", "id");
   public static final QueryField CATEGORY = field("LocationInfo", "Category");
   public static final QueryField IMAGE_KEY = field("LocationInfo", "ImageKey");
+  public static final QueryField FACTS = field("LocationInfo", "Facts");
+  public static final QueryField ADDRESS = field("LocationInfo", "Address");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Preferences") Preferences Category;
   private final @ModelField(targetType="String") String ImageKey;
+  private final @ModelField(targetType="String") String Facts;
+  private final @ModelField(targetType="String") String Address;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   /** @deprecated This API is internal to Amplify and should not be used. */
@@ -52,6 +56,14 @@ public final class LocationInfo implements Model {
       return ImageKey;
   }
   
+  public String getFacts() {
+      return Facts;
+  }
+  
+  public String getAddress() {
+      return Address;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -60,10 +72,12 @@ public final class LocationInfo implements Model {
       return updatedAt;
   }
   
-  private LocationInfo(String id, Preferences Category, String ImageKey) {
+  private LocationInfo(String id, Preferences Category, String ImageKey, String Facts, String Address) {
     this.id = id;
     this.Category = Category;
     this.ImageKey = ImageKey;
+    this.Facts = Facts;
+    this.Address = Address;
   }
   
   @Override
@@ -77,6 +91,8 @@ public final class LocationInfo implements Model {
       return ObjectsCompat.equals(getId(), locationInfo.getId()) &&
               ObjectsCompat.equals(getCategory(), locationInfo.getCategory()) &&
               ObjectsCompat.equals(getImageKey(), locationInfo.getImageKey()) &&
+              ObjectsCompat.equals(getFacts(), locationInfo.getFacts()) &&
+              ObjectsCompat.equals(getAddress(), locationInfo.getAddress()) &&
               ObjectsCompat.equals(getCreatedAt(), locationInfo.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), locationInfo.getUpdatedAt());
       }
@@ -88,6 +104,8 @@ public final class LocationInfo implements Model {
       .append(getId())
       .append(getCategory())
       .append(getImageKey())
+      .append(getFacts())
+      .append(getAddress())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -101,6 +119,8 @@ public final class LocationInfo implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("Category=" + String.valueOf(getCategory()) + ", ")
       .append("ImageKey=" + String.valueOf(getImageKey()) + ", ")
+      .append("Facts=" + String.valueOf(getFacts()) + ", ")
+      .append("Address=" + String.valueOf(getAddress()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -123,6 +143,8 @@ public final class LocationInfo implements Model {
     return new LocationInfo(
       id,
       null,
+      null,
+      null,
       null
     );
   }
@@ -130,13 +152,17 @@ public final class LocationInfo implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       Category,
-      ImageKey);
+      ImageKey,
+      Facts,
+      Address);
   }
   public interface BuildStep {
     LocationInfo build();
     BuildStep id(String id);
     BuildStep category(Preferences category);
     BuildStep imageKey(String imageKey);
+    BuildStep facts(String facts);
+    BuildStep address(String address);
   }
   
 
@@ -144,14 +170,18 @@ public final class LocationInfo implements Model {
     private String id;
     private Preferences Category;
     private String ImageKey;
+    private String Facts;
+    private String Address;
     public Builder() {
       
     }
     
-    private Builder(String id, Preferences Category, String ImageKey) {
+    private Builder(String id, Preferences Category, String ImageKey, String Facts, String Address) {
       this.id = id;
       this.Category = Category;
       this.ImageKey = ImageKey;
+      this.Facts = Facts;
+      this.Address = Address;
     }
     
     @Override
@@ -161,7 +191,9 @@ public final class LocationInfo implements Model {
         return new LocationInfo(
           id,
           Category,
-          ImageKey);
+          ImageKey,
+          Facts,
+          Address);
     }
     
     @Override
@@ -173,6 +205,18 @@ public final class LocationInfo implements Model {
     @Override
      public BuildStep imageKey(String imageKey) {
         this.ImageKey = imageKey;
+        return this;
+    }
+    
+    @Override
+     public BuildStep facts(String facts) {
+        this.Facts = facts;
+        return this;
+    }
+    
+    @Override
+     public BuildStep address(String address) {
+        this.Address = address;
         return this;
     }
     
@@ -188,8 +232,8 @@ public final class LocationInfo implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Preferences category, String imageKey) {
-      super(id, Category, ImageKey);
+    private CopyOfBuilder(String id, Preferences category, String imageKey, String facts, String address) {
+      super(id, Category, ImageKey, Facts, Address);
       
     }
     
@@ -201,6 +245,16 @@ public final class LocationInfo implements Model {
     @Override
      public CopyOfBuilder imageKey(String imageKey) {
       return (CopyOfBuilder) super.imageKey(imageKey);
+    }
+    
+    @Override
+     public CopyOfBuilder facts(String facts) {
+      return (CopyOfBuilder) super.facts(facts);
+    }
+    
+    @Override
+     public CopyOfBuilder address(String address) {
+      return (CopyOfBuilder) super.address(address);
     }
   }
   

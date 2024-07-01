@@ -1,7 +1,12 @@
 package com.example.test4;
 
 
+
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.health.connect.datatypes.Metadata;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,9 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.storage.StoragePath;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+
 
 
 public class UploadActivity extends AppCompatActivity {
@@ -55,12 +63,6 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-    //For Conifrm Upload button
-    public void onUploadPressedGal(View view){
-        if(imageUri != null){
-            uploadFile(imageUri);
-        }
-    }
 
     private void uploadFile(Uri fileUri) {
         try{
@@ -68,8 +70,8 @@ public class UploadActivity extends AppCompatActivity {
             InputStream inputStream = getContentResolver().openInputStream(fileUri);
 
             //temp file
-            File uploadFile = new File(getCacheDir(), "upload_image.jpg");
-            FileOutputStream outputStream = new FileOutputStream(uploadFile);
+            File uploadFile1 = new File(getCacheDir(), "upload_image.jpeg");
+            FileOutputStream outputStream = new FileOutputStream(uploadFile1);
 
 
             //Create buffer
@@ -84,20 +86,27 @@ public class UploadActivity extends AppCompatActivity {
             inputStream.close();
 
             Amplify.Storage.uploadFile(
-                    StoragePath.fromString("public/uploaded"),
-                    uploadFile,
+                    StoragePath.fromString("public/userUpload/uploaded.jpeg"),
+                    uploadFile1,
                     result -> Log.i("MyAppStorage", "Successfully uploaded "),
                     storageFailure -> Log.e("MyAppStorage", "Upload failed", storageFailure)
             );
+
         } catch(Exception e){
             Log.e("AppDataStorage", "Upload Failed", e);
+
         }
+
     }
 
-
-
-
-
+    //For Confirm Upload button
+    public void onUploadPressedGal(View view){
+        if(imageUri != null){
+            uploadFile(imageUri);
+        }
+        Intent i = new Intent(this, RekogitionClientActivity.class);
+        startActivity(i);
+    }
 
 
 }

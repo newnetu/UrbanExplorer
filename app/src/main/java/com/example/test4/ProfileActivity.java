@@ -1,6 +1,9 @@
 package com.example.test4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +23,20 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView userName = findViewById(R.id.textView19);
+
+
+
     }
+
+    public void goBackHome(View view){
+        Intent i = new Intent(this,HomeActivity.class);
+        startActivity(i);
+    }
+
+
+
+
+
 }

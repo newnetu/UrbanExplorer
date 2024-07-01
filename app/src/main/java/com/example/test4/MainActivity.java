@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Amplify.Auth.getCurrentUser(
                 authUser ->{ //onSuccess
                         //Go to the login screen
-                        Intent i = new Intent(getApplicationContext(), UploadActivity.class);
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(i);
                 },
                 AuthException ->{ //onError

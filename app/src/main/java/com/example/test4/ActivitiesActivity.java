@@ -1,6 +1,8 @@
 package com.example.test4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,15 @@ public class ActivitiesActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void foodClicked(View view){
+        Intent i =  new Intent(this,FoodActivity.class);
+        startActivity(i);
+    }
+
+    public void HistoryClicked(View view){
+        Intent i =  new Intent(this,HistoryActivity.class);
+        startActivity(i);
+    }
+
 }
