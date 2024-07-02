@@ -3,7 +3,7 @@
     <string name="headingLI">UrbanExplorer</string>
     <string name="button2">Login</string>
     <string name="button3">Sign Up</string>
-    <string name="textView">Join UrbanExplorer</string>
+    <string name="textView">Lets get Started</string>
     <string name="textView3">Welcome to Urban Explorer</string>
 
     <string name="textView4">Choose a City</string>
@@ -27,7 +27,7 @@
     <string name="textView18">Robben Island</string>
 
     <string name="textView21">Profile</string>
-    <string name="textView22">Name</string>
+    <string name="textView22">Email</string>
     <string name="textView23">Point</string>
     <string name="textView19">Sibusiso</string>
     <string name="textView20">1234pts</string>

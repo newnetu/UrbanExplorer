@@ -15,6 +15,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="116dp"
         android:text="@string/textView9"
+        android:textColor="#6100ff"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -45,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView9"
         tools:ignore="ContentDescription"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:src = "@drawable/teddy1" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -57,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         tools:ignore="ContentDescription"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:src = "@drawable/history" />
 
     <TextView
         android:id="@+id/textView11"

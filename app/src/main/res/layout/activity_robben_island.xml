@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="Robben Island Museum"
+        android:text="Robben Island"
         android:textSize="30sp"
         android:textColor="#6100ff"
         app:layout_constraintEnd_toEndOf="parent"
