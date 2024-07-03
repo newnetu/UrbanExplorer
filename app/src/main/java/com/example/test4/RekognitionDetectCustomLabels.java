@@ -13,6 +13,7 @@ import com.amazonaws.services.rekognition.AmazonRekognitionClient;
 import com.amazonaws.services.rekognition.model.CustomLabel;
 import com.amazonaws.services.rekognition.model.DetectCustomLabelsRequest;
 import com.amazonaws.services.rekognition.model.DetectCustomLabelsResult;
+import com.amplifyframework.core.Amplify;
 
 import java.util.List;
 
@@ -75,6 +76,10 @@ public class RekognitionDetectCustomLabels extends AsyncTask<Void,Void,String> {
         if(result.equals("Cape Town City Hall")){
             Log.i("addPoints", "I will add");
             Toast.makeText(context, "added point", Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent(context, ProfileActivity.class);
+            i.putExtra("addPoint",true);
+            context.startActivity(i);
 
 
         }

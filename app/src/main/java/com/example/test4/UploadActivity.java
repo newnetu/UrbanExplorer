@@ -1,12 +1,9 @@
 package com.example.test4;
 
 
-
+import java.util.Random;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.health.connect.datatypes.Metadata;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -29,6 +26,10 @@ import java.io.FileOutputStream;
 
 
 public class UploadActivity extends AppCompatActivity {
+    Random rand = new Random();
+    int rand_int = rand.nextInt(1000);
+    String rnum = Integer.toString(rand_int);
+    String filefullname = "public/userUpload/uploaded"+rnum+".png";
 
     private final int GALLERY_REQ_CODE = 1000;
     private ImageView  imgGallery;
@@ -66,11 +67,13 @@ public class UploadActivity extends AppCompatActivity {
 
     private void uploadFile(Uri fileUri) {
         try{
+
             //Read the data Uri points too
             InputStream inputStream = getContentResolver().openInputStream(fileUri);
 
+
             //temp file
-            File uploadFile1 = new File(getCacheDir(), "upload_image.jpeg");
+            File uploadFile1 = new File(getCacheDir(), "upload_image.png");
             FileOutputStream outputStream = new FileOutputStream(uploadFile1);
 
 
@@ -86,9 +89,15 @@ public class UploadActivity extends AppCompatActivity {
             inputStream.close();
 
             Amplify.Storage.uploadFile(
-                    StoragePath.fromString("public/userUpload/uploaded.jpeg"),
+                    StoragePath.fromString(filefullname),
                     uploadFile1,
-                    result -> Log.i("MyAppStorage", "Successfully uploaded "),
+                    result ->{
+                        Log.i("MyAppStorage", "Successfully uploaded ");
+                        Intent i = new Intent(this, RekogitionClientActivity.class);
+                        i.putExtra("filename",filefullname);
+                        startActivity(i);
+
+                    },
                     storageFailure -> Log.e("MyAppStorage", "Upload failed", storageFailure)
             );
 
@@ -104,8 +113,6 @@ public class UploadActivity extends AppCompatActivity {
         if(imageUri != null){
             uploadFile(imageUri);
         }
-        Intent i = new Intent(this, RekogitionClientActivity.class);
-        startActivity(i);
     }
 
 

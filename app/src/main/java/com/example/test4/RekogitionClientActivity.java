@@ -34,13 +34,13 @@ package com.example.test4;
 
 public class RekogitionClientActivity extends AppCompatActivity {
 
-    private static final String MODEL_ARN = "arn:aws:rekognition:us-east-2:637423630489:project/Demo-urbanExplorer/version/Demo-urbanExplorer.2024-06-10T13.13.54/1718018035033";
-    private static final float MIN_CONFIDENCE = 80.0f;
-
-
+    private static final String MODEL_ARN = "arn:aws:rekognition:us-east-2:637423630489:project/Urban-Explorer2/version/Urban-Explorer2.2024-07-03T12.13.10/1720001590980";
+    private static final float MIN_CONFIDENCE = 50.0f;
+    private static final String accessKey = "AKIAZI2LIXCMZVPJHSN2";
+    private static final String secretKey = "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";
 
     private static final String BUCKET_NAME = "user-upload-urbanexplorer61b32-dev";
-    private static final String PHOTO_KEY = "public/userUpload/uploaded.jpeg";
+
 
 
 
@@ -58,22 +58,22 @@ public class RekogitionClientActivity extends AppCompatActivity {
             return insets;
         });
 
-        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                getApplicationContext(),
-                "your_identity_pool_id",
-                Regions.US_EAST_2 // Replace with your region
-        );
+//        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+//                getApplicationContext(),
+//                "your_identity_pool_id",
+//                Regions.US_EAST_2 // Replace with your region
+//        );
+//         AmazonRekognition rekognitionClient = new AmazonRekognitionClient(credentialsProvider);
 
-        AmazonRekognition rekognitionClient = new AmazonRekognitionClient(credentialsProvider);
-
-//        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey,secretKey);
+        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey,secretKey);
 //
 //
-//        AmazonRekognition rekognitionClient = new AmazonRekognitionClient(awsCredentials);
+        AmazonRekognition rekognitionClient = new AmazonRekognitionClient(awsCredentials);
         rekognitionClient.setRegion(com.amazonaws.regions.Region.getRegion(US_EAST_2));
-        AmazonS3 s3Client = new AmazonS3Client(credentialsProvider, Region.getRegion(US_EAST_2));
+        AmazonS3 s3Client = new AmazonS3Client(awsCredentials, Region.getRegion(US_EAST_2));
 
-
+        String PHOTO_KEY = getIntent().getStringExtra("filename");
+        Log.i("PHOTO_KEY",PHOTO_KEY);
 
         String outputComparison = getIntent().getStringExtra("selected");
         Log.i("compare"," "+outputComparison);

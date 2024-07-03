@@ -66,6 +66,8 @@ public class EmailConfirmationActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess(AuthSignInResult authSignInResult) {
+
+
         UserData newUser = UserData.builder()
                 .name(getName())
                 .email(getEmail())
@@ -82,6 +84,7 @@ public class EmailConfirmationActivity extends AppCompatActivity {
     private void onSavedSuccess(GraphQLResponse<UserData> userDataGraphQLResponse) {
         Log.i("User DataStore","Saved Successfully");
         Intent i = new Intent(this,HomeActivity.class);
+        i.putExtra("email",getEmail());
         startActivity(i);
 
     }

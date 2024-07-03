@@ -53,7 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess(AuthSignInResult authSignInResult) {
+        EditText txtEmail = findViewById(R.id.txtEmail);
         Intent i = new Intent(this,HomeActivity.class);
+        i.putExtra("email",txtEmail.getText().toString());
         startActivity(i);
 
 
@@ -64,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this,SignUpActivity.class);
         startActivity(i);
     }
+
+
+
 
 
 }
