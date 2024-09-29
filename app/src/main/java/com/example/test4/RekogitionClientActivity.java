@@ -34,12 +34,12 @@ package com.example.test4;
 
 public class RekogitionClientActivity extends AppCompatActivity {
 
-    private static final String MODEL_ARN = "arn:aws:rekognition:us-east-2:637423630489:project/Demo-urbanExplorer/version/Demo-urbanExplorer.2024-06-10T13.13.54/1718018035033";
+    private static final String MODEL_ARN = "XXXX";
     private static final float MIN_CONFIDENCE = 80.0f;
 
 
 
-    private static final String BUCKET_NAME = "user-upload-urbanexplorer61b32-dev";
+    private static final String BUCKET_NAME = "XXXX";
     private static final String PHOTO_KEY = "public/userUpload/uploaded.jpeg";
 
 
