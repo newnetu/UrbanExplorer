@@ -34,12 +34,12 @@ package com.example.test4;
 
 public class RekogitionClientActivity extends AppCompatActivity {
 
-    private static final String MODEL_ARN = "arn:aws:rekognition:us-east-2:637423630489:project/Urban-Explorer2/version/Urban-Explorer2.2024-07-03T12.13.10/1720001590980";
+    private static final String MODEL_ARN = "arn:aws:rekognition:us-east-2:XXXX";
     private static final float MIN_CONFIDENCE = 50.0f;
-    private static final String accessKey = "AKIAZI2LIXCMZVPJHSN2";
-    private static final String secretKey = "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";
+    private static final String accessKey = "XXXX";
+    private static final String secretKey = "XXXX";
 
-    private static final String BUCKET_NAME = "user-upload-urbanexplorer61b32-dev";
+    private static final String BUCKET_NAME = "XXXX";
 
 
 
